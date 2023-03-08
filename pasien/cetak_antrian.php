@@ -1,0 +1,148 @@
+<style>
+    td {
+        line-height: 85%;
+    }
+</style>
+
+<?php
+
+extract($_GET);
+
+
+if (isset($_GET['nama_pasien'])) {
+    $nama_pasien = $_GET['nama_pasien'];
+}
+
+if (isset($_GET['nomor_antrian'])) {
+    $nomor_antrian = $_GET['nomor_antrian'];
+}
+
+if (isset($_GET['nomor_loket'])) {
+    $nomor_loket = $_GET['nomor_loket'];
+}
+
+if (isset($_GET['nama_dokter'])) {
+    $nama_dokter = $_GET['nama_dokter'];
+}
+
+
+// $v_nama_pasien = explode("****",$nama_pasien);
+
+// $norm_ = $v_nama_pasien[0];
+// $nama_ = $v_nama_pasien[1];
+
+$norm_ = $nama_pasien;
+$nama_ = $nomor_antrian;
+
+$report = '
+<style type="text/css">
+p {
+    font-size:12px; line-height: 10px;
+ }
+</style>     
+                  
+		         
+
+<div align="center">
+        <table border="0" width="50%">
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td>
+        <p align="center"><u>RSJ Kalawa Atei</u></td>
+        <td width="120">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td>
+        <p align="center">Kalimantan Tengah</td>
+        <td width="120">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td width="120">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td align="center">No. RM : '.$norm_.'</td>
+        <td width="120">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td align="center">Nomor antrian </td>
+        <td width="120">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="53" height="125">&nbsp;</td>
+        <td height="125" align="center"><font size="7"><div id="no_urut">'.$nomor_antrian.'</div></font></td>
+        <td width="120" height="125">&nbsp;</td>
+    </tr>
+ 
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td align="center">'.$nomor_loket.'</td>
+        <td width="120">&nbsp;</td>
+    </tr>
+
+    <tr>
+    <td width="53">&nbsp;</td>
+    <td align="center">'.$nama_dokter.'</td>
+    <td width="120">&nbsp;</td>
+</tr>
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td align="center">Terimakasih atas kunjungan Anda</td>
+        <td width="120">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td width="120">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="53">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td width="120">&nbsp;</td>
+    </tr>
+</table>
+</div>
+
+		 
+		 
+';
+
+
+echo $report;
+?>
+<script>
+    window.print();
+</script>
+
+<script type="text/javascript">
+
+               
+        // $("document").ready(function()
+        // {
+        //     $('#loading').hide();       
+        //     $('.next_queue').show();           
+        //     $(".peringatan").hide();
+            
+          
+        //     var uri_stage = "../apps/last_stage_apotik.php";
+          
+        //     var data = {"loket": 0};
+
+
+        //     $.ajax({
+        //         type: "POST",
+        //         dataType: "json",
+        //         url: uri_stage,//request
+        //         data: data,
+        //         success: function(data) {
+        //             no_antrian_db = parseInt(data["next"]);
+        //             $("#no_urut").html(no_antrian_db);
+                   
+        //         }
+        //     });
+
+</script>
