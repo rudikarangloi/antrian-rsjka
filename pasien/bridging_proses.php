@@ -651,6 +651,8 @@ if($reqdata=="ref_poli"){
    $encodedSignature = base64_encode($signature);
    $userkey = "556b3a1346f1c3ac4eeb197c85ea3f34";
    $ip = "https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev";
+   $ip = "https://apijkn.bpjs-kesehatan.go.id/antreanrs";
+
 
    $tgl=date("Y-m-d H:i:s");
    $tglbr=date("Y-m-d");
@@ -705,6 +707,7 @@ if($reqdata=="ref_poli"){
    
    }
    else{
+      //echo $response['metadata']['message'];
       //echo "Error men";
       //echo $response;
       echo   $sepi. ' X-Timestamp = '.$tStamp. ' X-Signature = '.$encodedSignature;

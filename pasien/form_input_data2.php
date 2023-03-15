@@ -422,7 +422,7 @@ $jaminan = $response_data->data;
 									<td width="1%">&nbsp;</td>
 									<td width="92%" colspan="7">
 										<button type="button" value="SAVE" name="fSave" id="fSave" class="btn btn-envato btn-block ">PROSES</button>
-										<!-- <button type="button" name="B3231" class="btn btn-envato btn-block" onClick="peserta()"> PROSES .. </button>  -->
+										<button type="button" name="B3231" class="btn btn-envato btn-block" onClick="peserta()"> PROSES .. </button>  
 										<button type="button" class="btn btn-envato btn-block " onclick="goBack()">BATAL</button>
 									</td>
 									<td width="37%">&nbsp;</td>
