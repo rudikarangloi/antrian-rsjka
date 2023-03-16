@@ -65,15 +65,15 @@ $url_api = "api_loket/";
   <script type="text/javascript">
     $(document).ready(function () {
 
-      <!-- $(document).keyboard({ -->
-      <!-- language: 'us:English, arabic:العَرَبِيَّة, vietnamese:tiếng Việt, hindi:हिन्दी',			  -->
-      <!-- enterKey: function () { -->
-      <!-- alert('Hey there! This is a callback function example.'); -->
-      <!-- }, -->
-      <!-- keyboardPosition: 'bottom', -->
-      <!-- directEnter: false, -->
-      <!-- showSelectedLanguage: false -->
-      <!-- }); -->
+      // <!-- $(document).keyboard({ -->
+      // <!-- language: 'us:English, arabic:العَرَبِيَّة, vietnamese:tiếng Việt, hindi:हिन्दी',			  -->
+      // <!-- enterKey: function () { -->
+      // <!-- alert('Hey there! This is a callback function example.'); -->
+      // <!-- }, -->
+      // <!-- keyboardPosition: 'bottom', -->
+      // <!-- directEnter: false, -->
+      // <!-- showSelectedLanguage: false -->
+      // <!-- }); -->
     });
   </script>
 </head>
@@ -277,33 +277,34 @@ $url_api = "api_loket/";
 
             if (data['peringatan'] == '1') {
               $('#peringatan').show();	
-			  
+              $('#peringatan').html(' Data Tidak di kenal'); 
+             			  
 			  
             } else {
-              $('#peringatan').html('Data Berhasil Di temukan <br> Proses Sedang Berlangsung');
-			  //alert(data['data']['Nama'])
-			  //alert(data['data']['NoRekMed'])
-			  //alert(data['data']['No_KTP'])
-			  //alert(data['data']['FS_KOTA_PASIEN']) 
-			  //alert(data['data']['FS_TLP_PASIEN'])
-			  
-			 /*
-			  document.getElementById("FS_MR").value = data['data']['FS_MR'];
-			  document.getElementById("FS_KD_IDENTITAS").value = data['data']['FS_KD_IDENTITAS'];
-			  document.getElementById("FS_NM_PASIEN").value = data['data']['FS_NM_PASIEN'];
-			  document.getElementById("FS_ALM_PASIEN").value = data['data']['FS_ALM_PASIEN'];
-			  document.getElementById("FS_KOTA_PASIEN").value = data['data']['FS_KOTA_PASIEN'];
-			  document.getElementById("FS_TLP_PASIEN").value = data['data']['FS_TLP_PASIEN'];
-			 */
-			   
-			  document.getElementById("FS_MR").value = data['data']['NoRekMed'];
-			  document.getElementById("FS_KD_IDENTITAS").value = data['data']['No_KTP'];
-			  document.getElementById("FS_NM_PASIEN").value = data['data']['Nama'];
-			  document.getElementById("FS_ALM_PASIEN").value = data['data']['Alamat'];
-			  document.getElementById("FS_KOTA_PASIEN").value = data['data']['Kecamatan'];
-			  document.getElementById("FS_TLP_PASIEN").value = data['data']['No_Telpon'];
+              $('#peringatan').html('Data Berhasil Di temukan <br> Proses Sedang Berlangsung');                          
+                        
+              document.getElementById("FS_MR").value = data['data']['NoRekMed'];
+              document.getElementById("FS_KD_IDENTITAS").value = data['data']['No_KTP'];
+              document.getElementById("FS_NM_PASIEN").value = data['data']['Nama'];
+              document.getElementById("FS_ALM_PASIEN").value = data['data']['Alamat'];
+              document.getElementById("FS_KOTA_PASIEN").value = data['data']['Kecamatan'];
+              document.getElementById("FS_TLP_PASIEN").value = data['data']['No_Telpon'];
 			 
-              $(objfrm).submit()
+              //Jika directPrint = 1 maka cetak karcis
+              if (data['directPrint'] == '1') {
+                $('#peringatan').show();	
+                $('#peringatan').html('Mencetak karcis ...');   
+
+                showDoc('cetak_antrian', data['nomor_antrian'], data['data']['NoRekMed'], data['loket'], data['nama_dokter']);	
+                $('#peringatan').hide();	
+
+                kodebooking = data['kodebooking'];
+                taskid = "3";
+				        updateDataAntrean(kodebooking,taskid)
+
+              }else{
+                $(objfrm).submit();
+              }
             }
 
             $("#loadingImg").hide();
@@ -319,6 +320,36 @@ $url_api = "api_loket/";
 
 
     });
+
+
+    function showDoc(aX,nomor_antrian, no_rm, nomor_loket, nama_dokter) {
+
+        var nama_pasien = no_rm;
+        var inomor_antrian = nomor_antrian;
+        var nomor_loket = nomor_loket;
+        var nama_dokter = nama_dokter;
+
+        var LeftPosition = (screen.width) ? (screen.width - 40) / 2 : 100;
+        var TopPosition = (screen.height) ? (screen.height - 20) / 2 : 100;
+
+        URL =  aX + '.php?nama_pasien=' + nama_pasien + '&nomor_antrian=' + inomor_antrian + '&nomor_loket=' + nomor_loket + '&nama_dokter=' + nama_dokter;
+        window.open(URL, 'WinDOC' + aX, 'toolbar=no,menubar=yes, top=' + TopPosition + ',left=' + LeftPosition + ' location=no, scrollbars=yes, resizable, width=800, height=' + 400);
+    }
+
+    function updateDataAntrean(kodebooking,taskid) {
+
+      jQuery.post('bridging_proses.php',{
+        kodeBooking:kodebooking,
+        taskid:taskid,
+        reqdata:'updateWaktuAntrian'
+      },function(data){
+        
+        //alert(data);
+        var response =  eval("(" + data + ")");				
+
+      });		
+
+    }
   </script>
 
 </body>

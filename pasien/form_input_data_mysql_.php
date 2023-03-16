@@ -393,10 +393,12 @@ $("document").ready(function(){
 	console.log(' CrSaveData-> '+CrSaveData);
 	console.log(' CrSaveData2-> '+CrSaveData2);
 	
+	kodedokter = "<?php echo $kode_dokter;?>"; 
 	
-	 $.post( uri_serve, {
+	$.post( uri_serve, {
 				"loket" : loket,
-				"nomor_rm": nomor_rm				
+				"nomor_rm": nomor_rm,
+				"kodedokter": kodedokter				
 			} , function( data ) {
 				
 				//Jika cetak menggunakan mesin khusus

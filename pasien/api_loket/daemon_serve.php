@@ -10,12 +10,11 @@
 		
 	$loket                    = $_POST['loket'];
 	$nomor_rm                 = $_POST['nomor_rm'];	
+	$kodedokter              = $_POST['kodedokter'];
 
-   
+	//$filter_jenis_antrian = " AND jenis_antrian_poliklinik <> '0' ";
+	$filter_jenis_antrian = " AND jenis_antrian_poliklinik <> '0' AND kodedokter='".$kodedokter."'";
 
-	$filter_jenis_antrian = " AND jenis_antrian_poliklinik <> '0' ";
-	
-	
 	if($model_antrian == 1){
 		//Jika nomor antrian per loket
 		$rstCountId = $mysqli->query("SELECT count(*) as count FROM data_antrian WHERE counter='".$loket."' ".$filter_waktu.$filter_jenis_antrian);
